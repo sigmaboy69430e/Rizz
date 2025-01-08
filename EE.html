@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Embed URL in iframe</title>
+  <title> </title>
 </head>
 <body>
   <h1>Enter a URL to Embed in an iframe:</h1>
@@ -12,10 +12,6 @@
     <button type="submit">Embed</button>
   </form>
 
-  <div id="iframeContainer" style="margin-top: 20px; display: none;">
-    <iframe id="iframe" width="100%" height="600px"></iframe>
-  </div>
-
   <script>
     document.getElementById("urlForm").addEventListener("submit", function(event) {
       event.preventDefault();
@@ -23,12 +19,17 @@
       const url = document.getElementById("urlInput").value;
       
       if (url) {
-        // Display the iframe with the provided URL
-        const iframe = document.getElementById("iframe");
-        iframe.src = url;
+        // Open a new blank page (about:blank)
+        const newWindow = window.open("about:blank", "_blank");
         
-        // Show the iframe container
-        document.getElementById("iframeContainer").style.display = "block";
+        // Create an iframe element and set the URL
+        const iframe = newWindow.document.createElement("iframe");
+        iframe.src = url;
+        iframe.width = "100%";
+        iframe.height = "100%";
+        
+        // Append the iframe to the new window's body
+        newWindow.document.body.appendChild(iframe);
       } else {
         alert("Please enter a valid URL.");
       }
